@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Css/index.css">
+    <link rel="icon" href="/img/icons/favicon.ico" type="image/x-icon">
+    <title>ADMIN</title>
+</head>
+<body>
+    <%- include('../partials/header-tienda.ejs') %>
+    
+
+   <main class="container">
+        <form id="search-form">
+           
+            <img class="lupa-productos" src="/img/icons/search_icon.svg" alt="Ícono de lupa" />
+            <input class="placeholder-productos" id="search-input" placeholder="Código, nombre o categoría" />  
+    
+        </form>
+        <section >
+            <div class="listadoAdmin">
+        <h1 class="tituloAdmin">LISTADO DE PRODUCTOS</h1>
+        <div class="agregarAdmin">
+            <h2>AGREGAR</h2>
+            <a href="admin/create">
+                <button>
+                    <img src="/img/icons/Vector.svg" alt="boton plus">
+                </button>
+            </a>
+        </div>
+</div>
+
+<div class="tabla-productos">
+    <table class="wrapperProduct">
+        <thead>
+            <tr>
+                <th class="id">ID</th>
+                <th class="codigo">Código</th>
+                <th class="product">Nombre del Producto</th>
+                <th class="categoria">Categoría</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+       
+        <tbody>
+            <% productos.forEach(producto => { %>
+                <tr>
+                  <td><%= producto.id %></td>
+                  <td><%= producto.code %></td>
+                  <td><%= producto.name %></td>
+                  <td><%= producto.category %></td>
+                    <td>
+                        <a href="admin/edit/<%= producto.id %>">
+                            <button type="button"><img src="/img/icons/edit_pencil.svg" alt="Editar Producto"></button>
+                          </a>
+                    </td>
+                    <td>
+                        <form action="/admin/delete/<%= producto.id %>?_method=DELETE" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+
+                            <button type="submit"><img src="/img/icons/delete_trash.svg" alt="Eliminar Producto"></button>
+                        </form>
+                    </td>
+                </tr>
+                <% }); %>
+        </tbody>
+      
+    </table>
+</div>
+</main>
+
+<%- include('../partials/footer.ejs') %>
+            <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+            <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+        </body>
+            </html>  
+
+
+    
